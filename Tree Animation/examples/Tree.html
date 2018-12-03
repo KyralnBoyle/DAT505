@@ -48,8 +48,6 @@
 			init();
 			animate();
 
-			//
-
 			function init() {
 
 				initGUI();
@@ -66,8 +64,10 @@
 
 				var sceneA = new Scene( "sphere", 1000, 1200, 120, new THREE.Vector3( 0, - 0.4, 0 ), 0xffffff );
 				var sceneB = new Scene( "cube", 5000, 2000, 50, new THREE.Vector3( 0, 0.2, 0.1 ), 0x000000 );
+				var sceneC = new Scene( "cube", 1000, 1200, 120, new THREE.Vector3( 0, - 0.4, 0 ), 0xff0000 );
+				var sceneD = new Scene( "sphere", 5000, 2000, 50, new THREE.Vector3( 0, 0.2, 0.1 ), 0x0066ff );
 
-				transition = new Transition( sceneA, sceneB );
+				transition = new Transition( sceneA, sceneB, sceneC, sceneD );
 
 			}
 

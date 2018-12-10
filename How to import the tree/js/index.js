@@ -1,4 +1,4 @@
-//Global variables
+§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§//Global variables
 var renderer, scene, camera, composer, octoMain, skeleton, particle;
 var bar01, bar02;
 

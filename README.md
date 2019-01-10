@@ -12,7 +12,7 @@ what to expect:
 
 ## How to Load
 
-To load simply clone this repository or save it to your desktop, Open the code and documents in ATOM or what your preferred code reader is. Start a live server, with atom you can access one through packages, and that is all, everything will load up and enjoy the calming effects the whole scene has to offer.
+To load simply clone this repository or save it to your desktop, Open the code and documents in ATOM or what your preferred code reader is. Start a live server, with atom you can access one through packages, and that is all, load in **chrome** to enjoy the sound, also enjoy the calming effects the whole scene has to offer.
 
 How to find ATOM live server:
 

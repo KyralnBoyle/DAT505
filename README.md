@@ -9,3 +9,5 @@ This is a three.js project, in this project I have spent time developing a calmi
 ## How to Load
 
 To load simply clone this repository or save it to your desktop, Open the code and documents in ATOM or what your preferred code reader is. Start a live server, with atom you can access one through packages, and that is all, everything will load up and enjoy the calming effects the whole scene has to offer.
+
+![ATOM live server example](load.png)

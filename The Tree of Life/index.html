@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <title>Tree of life</title>
   <link rel="stylesheet" href="css/style.css">
-<script src="build/three.min.js"></script>
-<script src="build/OBJLoader.js"></script>
-<script src="build/MTLLoader.js"></script>
-<script src="js/WebGL.js"></script>
-<script src="js/libs/stats.min.js"></script>
-<script src="js/controls/OrbitControls.js"></script>
+  <script src="build/three.min.js"></script>
+  <script src="build/OBJLoader.js"></script>
+  <script src="build/MTLLoader.js"></script>
+  <script src="js/WebGL.js"></script>
+  <script src="js/libs/stats.min.js"></script>
+  <script src="js/controls/OrbitControls.js"></script>
 
 </head>
 <body>
@@ -20,16 +20,17 @@
     Click <strong>H</strong> to activate hemisphere light, <strong>D</strong> to activate directional light, then to deactivate the light click the coresponding letter again.
   </div>
 
+  <!-- Pre set variables to help with the colour of the sky and the ground, they also help with she shading  -->
   <script type="x-shader/x-vertex" id="vertexShader">
 
-  varying vec3 vWorldPosition; // Sets the blue colour
+  varying vec3 vWorldPosition;
 
   void main() {
 
     vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
-    vWorldPosition = worldPosition.xyz; //sets the fade for the blue
+    vWorldPosition = worldPosition.xyz;
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); //also helps set the blue
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
   }
 
@@ -61,6 +62,7 @@
 
   }
 
+  //VARIABLES
   var camera, scene, renderer, dirLight, dirLightHeper, hemiLight, hemiLightHelper, controls;
   var mixers = [];
   var stats;
@@ -76,6 +78,7 @@
 
   function init() {
 
+    // CAMERA/SCENE
     var container = document.getElementById( 'container' );
     container = document.createElement( 'div' );
     document.body.appendChild( container );
@@ -94,8 +97,6 @@
     hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
     hemiLight.position.set( 0, 50, 0 );
     scene.add( hemiLight );
-
-    //
 
     dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
     dirLight.color.setHSL( 0.1, 1, 0.95 );
@@ -153,12 +154,13 @@
 
     //TREE
 
-    // Model/material loading!
+    // Model/material
     var mtlLoader = new THREE.MTLLoader();
     mtlLoader.load("Tree/Treewqithleafs.mtl", function(materials){
 
       materials.preload();
 
+      //Loading object
       objLoader = new THREE.OBJLoader();
       objLoader.setMaterials(materials);
 
@@ -172,6 +174,21 @@
         scene.add(mesh);
         mesh.position.set(4, -20, 100);
       });
+    });
+
+    //SOUND
+
+    var audioListener = new THREE.AudioListener();
+    camera.add(audioListener);
+
+    var sound = new THREE.Audio(audioListener);
+    var audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sound/WindSound.mp3', function(buffer) {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.5);
+      sound.play();
+
     });
 
     // RENDERER
@@ -188,19 +205,18 @@
 
     // CONTROLS
 
-controls = new THREE.OrbitControls( camera, renderer.domElement );
+    //This allows the user to look around the scene
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
 
-controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
 
-controls.screenSpacePanning = false;
+    controls.minDistance = 100;
+    controls.maxDistance = 500;
 
-controls.minDistance = 100;
-controls.maxDistance = 500;
-
-controls.maxPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI / 2;
 
     // STATS
 
@@ -224,6 +240,7 @@ controls.maxPolarAngle = Math.PI / 2;
 
   }
 
+  //Settings for the keys, to change the lights
   function onKeyDown( event ) {
 
     switch ( event.keyCode ) {
@@ -269,5 +286,5 @@ controls.maxPolarAngle = Math.PI / 2;
     renderer.render( scene, camera );
   }
   </script>
-  </body>
-  </html>
+</body>
+</html>
